@@ -1,24 +1,21 @@
 // process.stdout.write('\x07'); //makes beep noise
+const beep = function() {
+  process.stdout.write('\x07');
+  console.log("beep \n");
+};
 
 const timer = function(delay) {
-  setTimeout(() => {
-    process.stdout.write('\x07');
-  }, delay);
+  delay = Number(delay);
+  
+  if (delay < 0 || delay === "" || isNaN(delay)) {
+    console.log("error");
+    return;
+  }
+  let secondsTillBeep = (delay * 1000);
+  setTimeout(beep, secondsTillBeep);
+};
+
+const args = process.argv.slice(2);
+for (let num of args) {
+  timer(num);
 }
-
-const args = process.argv;
-
-
-//input node timer1.js 10 3 5 15 9 
-
-// const sum = function(x, y) {
-//   x = Number(x);
-//   y = Number(y);
-//   let sum = x + y;
-//   return sum;
-// };
-
-
-// const args = process.argv;
-// let s = sum(args[2], args[3]);
-// console.log(s);
